@@ -1,0 +1,65 @@
+# Ignore Pattern eine auswahl und beispiele von ignore pattern findet man auch hier 
+
+# https://github.com/x3ro/gitignore
+
+
+
+# Project Folders
+
+# Dynamic Plugins
+bin/Dynamic/
+*._dynamic_.*
+
+OS junk files
+[Tt]humbs.db
+*.DS_Store
+ 
+#Visual Studio files
+*.user
+*.aps
+*.pch
+*.vspscc
+*.vssscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.[Cc]ache
+*.ilk
+*.log
+*.lib
+*.sbr
+*.sdf
+*.opensdf
+ipch/
+[Bb]uild/
+[Bb]uilds/
+Release
+Ankh.NoLoad
+
+ 
+#Archives
+
+#Subversion files
+.svn
+ 
+# Office Temp Files
+~$*
+ 
+# VVVV bcp
+*~.xml
+ 
+#media files
+
+
+#Custom
+Library/
+Temp/
+desktop.ini
+ignore/
+*.sln
+*.csproj
+.vscode
