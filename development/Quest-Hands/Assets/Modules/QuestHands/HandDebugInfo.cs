@@ -13,6 +13,7 @@ public class HandDebugInfo : MonoBehaviour
     void Start()
     {
         skeleton = GetComponent<AttachToFinger>().skeleton;
+        tipTransforms = new List<OVRBone>();
         tipTransforms.Clear();
 
         foreach(var t in tips) {
@@ -43,7 +44,9 @@ public class HandDebugInfo : MonoBehaviour
         averageBendiness = 0f;
         foreach(var b in tipTransforms) {
             str += b.Id.ToString() + ": " + b.Transform.localEulerAngles + "\n";
-            averageBendiness += b.Transform.localEulerAngles.z;
+            var val = b.Transform.localEulerAngles.z;
+            if(val > 180) val -= 360;
+            averageBendiness += val;
         }
 
         averageBendiness /= tipTransforms.Count;
