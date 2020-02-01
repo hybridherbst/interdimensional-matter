@@ -47,6 +47,7 @@ namespace Assets.RemoteHandsTracking
                 try
                 {
                     _tcpSender.SendKeepAlivePacket();
+                    Debug.Log("Sent Keep Alive Package");
                 }
                 catch (Exception e)
                 {

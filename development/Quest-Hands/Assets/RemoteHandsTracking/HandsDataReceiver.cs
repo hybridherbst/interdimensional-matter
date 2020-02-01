@@ -67,6 +67,7 @@ namespace Assets.RemoteHandsTracking
                 {
                     var data = _udpClient.Receive(ref _ipEndPoint);
                     HandleIncomingData(data);
+                    Debug.Log("got hand data");
                 }
                 catch (Exception e)
                 {

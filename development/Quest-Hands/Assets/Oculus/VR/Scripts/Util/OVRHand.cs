@@ -94,6 +94,10 @@ public class OVRHand : MonoBehaviour,
 		}
 		else
 		{
+#if UNITY_EDITOR
+         //in editor don't change _isInitialized - this could cause feeders adding data at invalid moment (depending on call order) - which will result in no hands being visible
+         return;
+#endif
 			_isInitialized = false;
 		}
 	}
