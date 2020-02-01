@@ -232,6 +232,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8241519930149928744, guid: b47a1d367e79d3147b0818abebcb28d7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5526
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241519930149928744, guid: b47a1d367e79d3147b0818abebcb28d7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.2486
+      objectReference: {fileID: 0}
     - target: {fileID: 8241519930149928745, guid: b47a1d367e79d3147b0818abebcb28d7,
         type: 3}
       propertyPath: skeleton
@@ -557,17 +567,17 @@ PrefabInstance:
     - target: {fileID: 8241519930149928744, guid: b47a1d367e79d3147b0818abebcb28d7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.021
       objectReference: {fileID: 0}
     - target: {fileID: 8241519930149928744, guid: b47a1d367e79d3147b0818abebcb28d7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.756
       objectReference: {fileID: 0}
     - target: {fileID: 8241519930149928744, guid: b47a1d367e79d3147b0818abebcb28d7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.2243
       objectReference: {fileID: 0}
     - target: {fileID: 8241519930149928744, guid: b47a1d367e79d3147b0818abebcb28d7,
         type: 3}
@@ -1080,17 +1090,17 @@ PrefabInstance:
     - target: {fileID: 8241519930149928744, guid: b47a1d367e79d3147b0818abebcb28d7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.0362
       objectReference: {fileID: 0}
     - target: {fileID: 8241519930149928744, guid: b47a1d367e79d3147b0818abebcb28d7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.756
       objectReference: {fileID: 0}
     - target: {fileID: 8241519930149928744, guid: b47a1d367e79d3147b0818abebcb28d7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.209
       objectReference: {fileID: 0}
     - target: {fileID: 8241519930149928744, guid: b47a1d367e79d3147b0818abebcb28d7,
         type: 3}
@@ -1640,6 +1650,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniformPrefix: _FingertipsRight
+  fromToDistance: {x: 0.15, y: 0}
+  power: 0.25
   pointsOfInterest:
   - {fileID: 189659312}
   - {fileID: 465360543}
@@ -2147,6 +2159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniformPrefix: _FingertipsLeft
+  fromToDistance: {x: 0.15, y: 0}
+  power: 0.25
   pointsOfInterest:
   - {fileID: 42542416}
   - {fileID: 1613750248}

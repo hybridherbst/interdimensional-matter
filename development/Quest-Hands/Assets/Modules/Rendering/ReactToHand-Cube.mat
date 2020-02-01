@@ -21,6 +21,6 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - _Power: 1
+    - _Power: 0.5
     m_Colors:
-    - _FromToDistance: {r: 0.3, g: 0, b: 0, a: 0}
+    - _FromToDistance: {r: 0.15, g: 0, b: 0, a: 0}

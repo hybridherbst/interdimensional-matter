@@ -7,6 +7,9 @@ using UnityEngine;
 public class DistanceGradient : MonoBehaviour
 {
     public string uniformPrefix = "";
+    public Vector2 fromToDistance = new Vector2(1,0);
+    public float power = 1f;
+
     public Transform[] pointsOfInterest;
     Vector4[] data = new Vector4[20];
 
@@ -26,6 +29,8 @@ public class DistanceGradient : MonoBehaviour
         if (pointsOfInterest == null) return;
 
         Shader.SetGlobalInt(uniformPrefix + "_DistanceGradientCentersLength", pointsOfInterest.Length);
+        Shader.SetGlobalVector(uniformPrefix + "_FromToDistance", fromToDistance);
+        Shader.SetGlobalFloat(uniformPrefix + "_Power", power);
 
         //var arr = pointsOfInterest.Where(x => x).Select(x => new Vector4(x.position.x, x.position.y, x.position.z, x.lossyScale.x * 0.5f)).ToArray();
         for(int i = 0; i < pointsOfInterest.Length; i++)
