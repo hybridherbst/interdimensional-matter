@@ -165,6 +165,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: FingerAttachment (Sphere)
       objectReference: {fileID: 0}
+    - target: {fileID: 8480938922933388392, guid: bc5a5a71e459d0a45b8881752e6c32a7,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000,
+        type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc5a5a71e459d0a45b8881752e6c32a7, type: 3}
 --- !u!4 &8241519930149928744 stripped
@@ -173,6 +179,60 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 571283917405551439}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4298128366134602764
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8241519930149928744}
+    m_Modifications:
+    - target: {fileID: 2852195953067604971, guid: e61be16a67e68bd45a6c5e42290e2227,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852195953067604971, guid: e61be16a67e68bd45a6c5e42290e2227,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852195953067604971, guid: e61be16a67e68bd45a6c5e42290e2227,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852195953067604971, guid: e61be16a67e68bd45a6c5e42290e2227,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852195953067604971, guid: e61be16a67e68bd45a6c5e42290e2227,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852195953067604971, guid: e61be16a67e68bd45a6c5e42290e2227,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852195953067604971, guid: e61be16a67e68bd45a6c5e42290e2227,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852195953067604971, guid: e61be16a67e68bd45a6c5e42290e2227,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6754214316632829982, guid: e61be16a67e68bd45a6c5e42290e2227,
+        type: 3}
+      propertyPath: m_Name
+      value: SpherifyDeformer
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e61be16a67e68bd45a6c5e42290e2227, type: 3}
 --- !u!1001 &8336264476596482039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -229,6 +289,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MagnetDeformer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6222287108807910100, guid: 2352cf3c00154494f934e12589daf99c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2352cf3c00154494f934e12589daf99c, type: 3}
