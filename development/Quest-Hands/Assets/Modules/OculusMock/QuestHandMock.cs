@@ -41,6 +41,9 @@ public class QuestHandMock : MonoBehaviour
 
     private void Awake() {
         skeleton = GetComponent<OVRSkeleton>();
+#if !UNITY_EDITOR
+        hand.gameObject.SetActive(false);
+#endif
     }
 
     void ConstructBones() {

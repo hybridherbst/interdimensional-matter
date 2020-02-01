@@ -7,12 +7,12 @@ using UnityEngine.UI;
 public class HandDebugInfo : MonoBehaviour
 {
     public Text fingerBend;
-    QuestHandMock skeleton;
+    public QuestHandMock skeleton;
 
     // Start is called before the first frame update
     void Start()
     {
-        skeleton = GetComponent<AttachToFinger>().skeleton;
+        // skeleton = GetComponentInChildren<AttachToFinger>().skeleton;
         tipTransforms = new List<OVRBone>();
         tipTransforms.Clear();
 
@@ -36,6 +36,19 @@ public class HandDebugInfo : MonoBehaviour
     List<OVRBone> tipTransforms;
 
     public float averageBendiness = 0f;
+
+    public float force {
+        get {
+            // below 30: 0
+            // 30 to 40: ramp 0..1
+            // above 40: 1
+            return Mathf.Clamp01(Remap(averageBendiness, 30, 40, 0, 1));
+        }
+    }
+
+    float Remap(float val, float srcMin, float srcMax, float dstMin, float dstMax) {
+        return (val - srcMin) / (srcMax - srcMin) * (dstMax - dstMin) + dstMin;
+    }
 
     // Update is called once per frame
     void Update()

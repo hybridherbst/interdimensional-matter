@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d0f4dfd8d43a35479d5fdaf26ce0f4c, type: 3}
   m_Name: Rigid Finger Settings
   m_EditorClassIdentifier: 
-  frictionStrength: 1
-  offsetStrength: -2
+  frictionStrength: 2
+  offsetStrength: -10
