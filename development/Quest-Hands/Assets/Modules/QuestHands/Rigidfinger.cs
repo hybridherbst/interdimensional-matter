@@ -32,6 +32,10 @@ public class Rigidfinger : MonoBehaviour
         // try to get there
         var delta = pPos - rigidbody.position;
 
+        if(delta.magnitude > 0.5f) {
+            rigidbody.MovePosition(pPos);
+        }
+
         Debug.DrawLine(pPos, rigidbody.position, Color.red);
 
         rigidbody.AddForce(delta * forceAmount);
@@ -70,7 +74,5 @@ public class Rigidfinger : MonoBehaviour
                 // other.rigidbody.MovePosition(other.rigidbody.position - parentDelta);
             }
         }
-
-        
     }
 }

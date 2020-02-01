@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5307fc3a013a8564d88801091a7d53d5, type: 3}
+  m_Name: Quest Hand Mock Map
+  m_EditorClassIdentifier: 
+  map:
+  - id: 0
+    match1: hand
+    match2: ignore
+  - id: 0
+    match1: hand
+    match2: ignore
+  - id: 1
+    match1: 
+    match2: 
+  - id: 2
+    match1: thumb
+    match2: 0
+  - id: 3
+    match1: thumb
+    match2: 1
+  - id: 4
+    match1: thumb
+    match2: 2
+  - id: 5
+    match1: thumb
+    match2: 3
+  - id: 6
+    match1: index
+    match2: 1
+  - id: 7
+    match1: index
+    match2: 2
+  - id: 8
+    match1: index
+    match2: 3
+  - id: 9
+    match1: middle
+    match2: 1
+  - id: 10
+    match1: middle
+    match2: 2
+  - id: 11
+    match1: middle
+    match2: 3
+  - id: 12
+    match1: ring
+    match2: 1
+  - id: 13
+    match1: ring
+    match2: 2
+  - id: 14
+    match1: ring
+    match2: 3
+  - id: 15
+    match1: pinky
+    match2: 0
+  - id: 16
+    match1: pinky
+    match2: 1
+  - id: 17
+    match1: pinky
+    match2: 2
+  - id: 18
+    match1: pinky
+    match2: 3
+  - id: 19
+    match1: thumb
+    match2: ignore
+  - id: 19
+    match1: thumb
+    match2: ignore
+  - id: 20
+    match1: index
+    match2: ignore
+  - id: 21
+    match1: middle
+    match2: ignore
+  - id: 22
+    match1: ring
+    match2: ignore
+  - id: 23
+    match1: pinky
+    match2: ignore
+  - id: 24
+    match1: 
+    match2: 
+  - id: 24
+    match1: 
+    match2: 
+  - id: -1
+    match1: 
+    match2: 

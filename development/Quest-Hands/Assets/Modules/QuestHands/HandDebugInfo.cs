@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class HandDebugInfo : MonoBehaviour
 {
     public Text fingerBend;
-    OVRSkeleton skeleton;
+    QuestHandMock skeleton;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +50,10 @@ public class HandDebugInfo : MonoBehaviour
         }
 
         averageBendiness /= tipTransforms.Count;
+        
+        if(Application.isEditor)
+            averageBendiness = -averageBendiness; // FOR MOCK HAND ONLY, OCULUS CUSTOM HAND RIG HAS REVERSED COORDINATES FOR SOME REASON
+
         str += "Avg: " + averageBendiness;
 
         fingerBend.text = str;

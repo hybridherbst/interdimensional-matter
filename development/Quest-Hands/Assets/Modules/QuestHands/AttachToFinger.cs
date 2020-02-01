@@ -6,7 +6,7 @@ using UnityEngine;
 [DefaultExecutionOrder(-69)]
 public class AttachToFinger : MonoBehaviour
 {
-    public OVRSkeleton skeleton;
+    public QuestHandMock skeleton;
     public OVRSkeleton.BoneId boneId;
     OVRBone bone;
 
