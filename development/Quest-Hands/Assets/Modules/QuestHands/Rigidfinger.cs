@@ -18,9 +18,9 @@ public class Rigidfinger : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>(); 
     }
 
-    Vector3 parentDelta;
+    Vector3 parentVelocity;
     Vector3 lastParentPos;
-    public float forceAmount = 100;
+    public float forceAmount => settings.forceAmount;
     public RigidFingerSettings settings;
     public float frictionStrength => settings.frictionStrength;
     public float offsetStrength => settings.offsetStrength;
@@ -39,9 +39,9 @@ public class Rigidfinger : MonoBehaviour
         var pPos = parent.position;
 
         // try to get there
-        var delta = pPos - rigidbody.position;
+        var delta = (pPos - rigidbody.position) / Time.fixedDeltaTime;
 
-        if(delta.magnitude > 0.5f) {
+        if((pPos - rigidbody.position).magnitude > 0.5f) {
             rigidbody.MovePosition(pPos);
         }
 
@@ -49,20 +49,26 @@ public class Rigidfinger : MonoBehaviour
 
         switch(mode) {
             case Mode.Force:
-                rigidbody.AddForce(delta * forceAmount);
+                rigidbody.AddForce(delta * forceAmount, ForceMode.Acceleration);
                 break;
             case Mode.Velocity:
                 rigidbody.velocity = delta;
                 break;
         }
         
-        parentDelta = (lastParentPos - pPos) / Time.fixedDeltaTime;
+        parentVelocity = (lastParentPos - pPos) / Time.fixedDeltaTime;
         lastParentPos = pPos;
 
         // Debug.Log(parentDelta.x.ToString("F6") + ";" + parentDelta.y.ToString("F6") + ";" + parentDelta.z.ToString("F6"));
 
-        Debug.DrawLine(pPos, pPos + parentDelta, Color.yellow);
+        Debug.DrawLine(pPos, pPos + parentVelocity, Color.yellow);
+
+        fingerVelocity = (lastFingerPos - rigidbody.position) / Time.fixedDeltaTime;
+        lastFingerPos = rigidbody.position;
     }
+
+    Vector3 fingerVelocity;
+    Vector3 lastFingerPos;
 
     private void OnCollisionEnter(Collision other) {
         // Debug.Log("Enter coll: " + other.rigidbody.name, other.rigidbody);
@@ -76,6 +82,7 @@ public class Rigidfinger : MonoBehaviour
         Debug.DrawLine(transform.position, transform.position + other.relativeVelocity, Color.green);
 
         foreach(var c in other.contacts) {
+            
             var offsetVector = parent.position - c.point;
             var offset = offsetVector.magnitude;
 
@@ -86,10 +93,12 @@ public class Rigidfinger : MonoBehaviour
                 // other.rigidbody.AddForceAtPosition(c.normal * offset, c.point, ForceMode.Force);
 
                 var multiplier = info.force;
-                other.rigidbody.AddForceAtPosition((-parentDelta) * frictionStrength * normalizedOffsetStrength, c.point);
-                other.rigidbody.AddForce(info.force * -offsetVector * offsetStrength);
+                other.rigidbody.AddForceAtPosition((-parentVelocity) * frictionStrength * normalizedOffsetStrength, c.point);
+                // other.rigidbody.AddForce(info.force * -offsetVector * offsetStrength);
                 // other.rigidbody.AddForce
                 // other.rigidbody.MovePosition(other.rigidbody.position - parentDelta);
+
+                // other.rigidbody.AddForceAtPosition(-fingerVelocity, c.point, ForceMode.Acceleration);
             }
         }
     }
