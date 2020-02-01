@@ -7,7 +7,7 @@ uniform float _FingertipsRight_Power;
 
 void _FingertipsRight_DistanceGradient_float (float3 worldPosition, out float distance, out float influence)
 {
-    distance = 10000;
+    distance = 10000; 
     influence = 0;
 
     // [unroll]

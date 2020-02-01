@@ -21,6 +21,13 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
+    - _InfluenceMetallic: 0.97
+    - _InfluenceSmoothness: 0.98
+    - _Metallic: 0.05
     - _Power: 0.5
+    - _Smoothness: 0.49
     m_Colors:
+    - _BaseColor: {r: 0.754717, g: 0.62341315, b: 0.31683874, a: 1}
     - _FromToDistance: {r: 0.15, g: 0, b: 0, a: 0}
+    - _LeftColor: {r: 1, g: 0, b: 0.70810366, a: 1}
+    - _RightColor: {r: 0.35686278, g: 1, b: 0.887031, a: 0.4627451}
