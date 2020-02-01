@@ -16,11 +16,11 @@ public class HandDebugInfo : MonoBehaviour
     }
 
     OVRSkeleton.BoneId[] tips = new OVRSkeleton.BoneId[] {
-        OVRSkeleton.BoneId.Hand_ThumbTip,
-        OVRSkeleton.BoneId.Hand_IndexTip,
-        OVRSkeleton.BoneId.Hand_MiddleTip,
-        OVRSkeleton.BoneId.Hand_RingTip,
-        OVRSkeleton.BoneId.Hand_PinkyTip
+        OVRSkeleton.BoneId.Hand_Thumb2,
+        OVRSkeleton.BoneId.Hand_Index2,
+        OVRSkeleton.BoneId.Hand_Middle2,
+        OVRSkeleton.BoneId.Hand_Ring2,
+        OVRSkeleton.BoneId.Hand_Pinky2
     };
 
     // Update is called once per frame
@@ -33,7 +33,6 @@ public class HandDebugInfo : MonoBehaviour
             if(b != null)
                 str += b.Id.ToString() + ": " + b.Transform.localEulerAngles + "\n";
         }
-        
 
         fingerBend.text = str;
     }
