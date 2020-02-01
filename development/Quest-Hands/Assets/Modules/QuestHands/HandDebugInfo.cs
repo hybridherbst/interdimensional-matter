@@ -13,6 +13,15 @@ public class HandDebugInfo : MonoBehaviour
     void Start()
     {
         skeleton = GetComponent<AttachToFinger>().skeleton;
+        tipTransforms.Clear();
+
+        foreach(var t in tips) {
+            var b = skeleton.Bones.FirstOrDefault(x => x.Id == t);
+            if(b != null)
+                tipTransforms.Add(b);
+        }
+
+
     }
 
     OVRSkeleton.BoneId[] tips = new OVRSkeleton.BoneId[] {
@@ -23,16 +32,22 @@ public class HandDebugInfo : MonoBehaviour
         OVRSkeleton.BoneId.Hand_Pinky2
     };
 
+    List<OVRBone> tipTransforms;
+
+    public float averageBendiness = 0f;
+
     // Update is called once per frame
     void Update()
     {
         var str = "";
-
-        foreach(var t in tips) {
-            var b = skeleton.Bones.FirstOrDefault(x => x.Id == t);
-            if(b != null)
-                str += b.Id.ToString() + ": " + b.Transform.localEulerAngles + "\n";
+        averageBendiness = 0f;
+        foreach(var b in tipTransforms) {
+            str += b.Id.ToString() + ": " + b.Transform.localEulerAngles + "\n";
+            averageBendiness += b.Transform.localEulerAngles.z;
         }
+
+        averageBendiness /= tipTransforms.Count;
+        str += "Avg: " + averageBendiness;
 
         fingerBend.text = str;
     }
