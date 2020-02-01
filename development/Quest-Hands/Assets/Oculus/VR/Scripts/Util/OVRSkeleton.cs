@@ -248,6 +248,7 @@ public class OVRSkeleton : MonoBehaviour
 					capsuleColliderGO.transform.localPosition = p0;
 					capsuleColliderGO.transform.localRotation = rot;
 					capsuleCollider.center = Vector3.right * mag * 0.5f;
+					capsuleColliderGO.layer = gameObject.layer;
 
 					_capsules[i] = new OVRBoneCapsule(capsule.BoneIndex, capsuleRigidBody, capsuleCollider);
 				}
