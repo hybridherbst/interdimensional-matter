@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -31,8 +32,18 @@ public class LevelControl : MonoBehaviour
         timeline.Play();
         yield return new WaitForSeconds(0.2f);
         levelParent.GetChild(currentLevel).gameObject.SetActive(true);
+        
+        // save isKinematic state
+        var rs = levelParent.GetComponentsInChildren<Rigidbody>().ToList();
+        var states = rs.Select(x => x.isKinematic).ToList();
+        foreach(var r in rs) {r.isKinematic = true;}
+
         moveInTimeline.Play();
         yield return new WaitForSeconds(1f);
+
+        // restore isKinematic state
+        for(int i = 0; i < rs.Count; i++)
+            rs[i].isKinematic = states[i];
     }
 
     [ContextMenu("Next")]
