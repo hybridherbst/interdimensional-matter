@@ -76,7 +76,7 @@ public class HandDebugInfo : MonoBehaviour
             // below 30: 0
             // 30 to 40: ramp 0..1
             // above 40: 1
-            return Mathf.Clamp01(Remap(averageBendiness, 30, 40, 0, 1));
+            return Mathf.Clamp01(Remap(averageBendiness, 35, 50, 0, 1));
         }
     }
 

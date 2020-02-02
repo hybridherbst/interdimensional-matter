@@ -40,6 +40,7 @@ public class TractorBeam : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        currentlyHoveredR = null;
         if(Physics.SphereCast(info.averageRootPos - info.handDirection * 0.1f, tractorBeamRadius, info.handDirection, out var hitInfo, Mathf.Infinity, layerMask)) {
             if(hitInfo.rigidbody && !hitInfo.rigidbody.isKinematic) {
                 currentlyHoveredR = hitInfo.rigidbody;
