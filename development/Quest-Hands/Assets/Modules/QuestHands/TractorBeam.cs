@@ -29,28 +29,65 @@ public class TractorBeam : MonoBehaviour
         visuals.rotation = Quaternion.LookRotation(info.handDirection);
     }
 
+    Rigidbody currentlyTargetedR;
+    Rigidbody currentlyHoveredR;
     Rigidbody lastR;
     Quaternion offsetRotation;
+
+    bool wasOn = false;
+    bool isOn = false;
 
     // Update is called once per frame
     void FixedUpdate()
     {
         if(Physics.SphereCast(info.averageRootPos - info.handDirection * 0.1f, tractorBeamRadius, info.handDirection, out var hitInfo, Mathf.Infinity, layerMask)) {
-            // Debug.Log("hit! : " + hitInfo.collider.name, hitInfo.collider);
-
             if(hitInfo.rigidbody && !hitInfo.rigidbody.isKinematic) {
-                var r = hitInfo.rigidbody;
-
-                if(r != lastR)
-                {
-                    lastR = r;
-                    offsetRotation = r.rotation * Quaternion.Inverse(info.wristTransform.rotation);
-                }
-                var offset = (r.position - forceCenter).normalized;
-                r.AddForce(-offset * force * info.force, ForceMode.Force);
-
-                r.rotation = Quaternion.Slerp(r.rotation, info.wristTransform.rotation * offsetRotation, Time.fixedDeltaTime * 5 * info.force);
+                currentlyHoveredR = hitInfo.rigidbody;
             }
         }
+
+        void CatchObject() {
+            currentlyTargetedR = currentlyHoveredR;
+        }
+
+        void ReleaseObject() {
+            currentlyTargetedR = null;
+        }
+
+        if(info.force > 0.1f) {
+            if(!isOn) {
+                CatchObject();
+                isOn = true;
+            }
+        }
+        if(info.force < 0.05f) {
+            if(isOn) {
+                ReleaseObject();
+                isOn = false;
+            }
+        }
+
+        //if(Physics.SphereCast(info.averageRootPos - info.handDirection * 0.1f, tractorBeamRadius, info.handDirection, out var hitInfo, Mathf.Infinity, layerMask)) {
+            // Debug.Log("hit! : " + hitInfo.collider.name, hitInfo.collider);
+
+        //    if(hitInfo.rigidbody && !hitInfo.rigidbody.isKinematic) {
+
+        
+        
+        var r = isOn ? currentlyTargetedR : currentlyHoveredR;
+
+        if(r) {
+            if(r != lastR)
+            {
+                lastR = r;
+                offsetRotation = Quaternion.Inverse(info.wristTransform.rotation) * r.rotation;
+            }
+            var offset = (r.position - forceCenter).normalized;
+            r.AddForce(-offset * force * info.force, ForceMode.Force);
+
+            r.rotation = Quaternion.Slerp(r.rotation, info.wristTransform.rotation * offsetRotation, Time.fixedDeltaTime * 5 * info.force);
+        }
+        //    }
+        //}
     }
 }

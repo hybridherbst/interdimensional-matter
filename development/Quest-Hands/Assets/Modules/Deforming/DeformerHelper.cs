@@ -5,10 +5,15 @@ using UnityEngine;
 public class DeformerHelper : MonoBehaviour
 {
     public Transform deformerParent;
+    public string deformerParentTag = "Hands";
 
     [ContextMenu("Deform Now")]
     void Start()
     {
+        // Debug.Log("Tag: " + deformerParentTag);
+        if(!deformerParent)
+            deformerParent = GameObject.FindWithTag(deformerParentTag).transform;
+
         var defs = deformerParent.GetComponentsInChildren<Deform.Deformer>();
         var def = GetComponent<Deform.Deformable>();
         foreach(var d in defs)
