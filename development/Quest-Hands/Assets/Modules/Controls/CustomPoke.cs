@@ -19,6 +19,7 @@ public class CustomPoke : MonoBehaviour
     public UnityEvent OnPressed; 
 
     private void Update() {
+        transform.localRotation = Quaternion.identity;
         localY = transform.localPosition.y;
 
         if(localY < activationMinY && !pressed) {

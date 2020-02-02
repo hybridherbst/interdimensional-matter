@@ -50,7 +50,7 @@ PlayableDirector:
   - key: {fileID: -5187854616030127942, guid: 70c7656ca52c7834ca2c15434ce75970, type: 2}
     value: {fileID: 1849862156852054463}
   - key: {fileID: -5072872828100865881, guid: 70c7656ca52c7834ca2c15434ce75970, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 8334442215278421982}
   m_ExposedReferences:
     m_References: []
 --- !u!95 &1849862156852054463
@@ -1097,6 +1097,12 @@ PrefabInstance:
 --- !u!4 &5768867162877720600 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3357850705298072427, guid: 76026ed7afb37834591560a9eaa4b3f6,
+    type: 3}
+  m_PrefabInstance: {fileID: 9121576448655350643}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8334442215278421982 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 954686682783513773, guid: 76026ed7afb37834591560a9eaa4b3f6,
     type: 3}
   m_PrefabInstance: {fileID: 9121576448655350643}
   m_PrefabAsset: {fileID: 0}
