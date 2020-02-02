@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   update: 1
-  factor: 0.02
+  factor: 0.012
   falloff: 3
   center: {fileID: 3203398616078854433}

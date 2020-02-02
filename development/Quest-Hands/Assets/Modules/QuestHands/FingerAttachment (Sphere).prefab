@@ -334,6 +334,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpherifyDeformer
       objectReference: {fileID: 0}
+    - target: {fileID: 6754214316632829982, guid: e61be16a67e68bd45a6c5e42290e2227,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e61be16a67e68bd45a6c5e42290e2227, type: 3}
 --- !u!1001 &8336264476596482039
@@ -396,7 +401,7 @@ PrefabInstance:
     - target: {fileID: 6222287108807910100, guid: 2352cf3c00154494f934e12589daf99c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2352cf3c00154494f934e12589daf99c, type: 3}

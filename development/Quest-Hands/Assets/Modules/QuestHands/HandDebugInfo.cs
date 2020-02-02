@@ -33,6 +33,8 @@ public class HandDebugInfo : MonoBehaviour
             if(b != null)
                 rootTransforms.Add(b);
         }
+
+        wristTransform = skeleton.Bones.FirstOrDefault(x => x.Id == OVRSkeleton.BoneId.Hand_WristRoot).Transform;
     }
 
     OVRSkeleton.BoneId[] tips = new OVRSkeleton.BoneId[] {
@@ -56,9 +58,13 @@ public class HandDebugInfo : MonoBehaviour
         OVRSkeleton.BoneId.Hand_Pinky1
     };
 
+
+
     List<OVRBone> midTransforms;
     List<OVRBone> tipTransforms;
     List<OVRBone> rootTransforms;
+
+    public Transform wristTransform;
 
     public Vector3 averageRootPos;
     public Vector3 averageTipPos;
