@@ -11,8 +11,20 @@ public class LevelControl : MonoBehaviour
 
     public Transform numberParent;
 
-    private void Start() {
-        StartLevel();    
+    private IEnumerator Start() {
+        for(int i = 0; i < numberParent.childCount; i++)
+            numberParent.GetChild(i).gameObject.SetActive(true);
+        for(int i = 0; i < levelParent.childCount; i++)
+            levelParent.GetChild(i).gameObject.SetActive(true);
+
+        for(int i = 0; i < numberParent.childCount; i++)
+            numberParent.GetChild(i).gameObject.SetActive(false);
+        for(int i = 0; i < levelParent.childCount; i++)
+            levelParent.GetChild(i).gameObject.SetActive(false);
+
+        yield return null;
+
+        currentMain = StartCoroutine(StartLevel());    
     }
 
     public PlayableDirector timeline;
@@ -46,31 +58,41 @@ public class LevelControl : MonoBehaviour
             rs[i].isKinematic = states[i];
     }
 
+    Coroutine currentMain;
+
     [ContextMenu("Next")]
     public void NextLevel() {
         StartCoroutine(_NextLevel());
     }
 
     IEnumerator _NextLevel() {
-        yield return StartCoroutine(StopLevel());
+        yield return currentMain;
+
+        currentMain = StartCoroutine(StopLevel());
+        yield return currentMain;
         currentLevel++;
         if(currentLevel >= levelParent.childCount)
             currentLevel = 0;
-        yield return StartCoroutine(StartLevel());
+        currentMain = StartCoroutine(StartLevel());
+        yield return currentMain;
     }
 
     [ContextMenu("Prev")]
     public void PreviousLevel() {
-        StartCoroutine(_PrevLevel());
+        currentMain = StartCoroutine(_PrevLevel());
     }
 
     IEnumerator _PrevLevel() {
-        yield return StartCoroutine(StopLevel());
+        yield return currentMain;
+
+        currentMain = StartCoroutine(StopLevel());
+        yield return currentMain;
         
         currentLevel--;
         if(currentLevel < 0)
             currentLevel = levelParent.childCount - 1;
 
-        yield return StartCoroutine(StartLevel());
+        currentMain = StartCoroutine(StartLevel());
+        yield return currentMain;
     }
 }

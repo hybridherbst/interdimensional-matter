@@ -8,8 +8,7 @@ public class DeformerHelper : MonoBehaviour
     public string deformerParentTag = "Hands";
 
     [ContextMenu("Deform Now")]
-    void Start()
-    {
+    private void Awake() {
         // Debug.Log("Tag: " + deformerParentTag);
         if(!deformerParent)
             deformerParent = GameObject.FindWithTag(deformerParentTag).transform;
@@ -20,6 +19,10 @@ public class DeformerHelper : MonoBehaviour
             def.DeformerElements.Add(new Deform.DeformerElement(d, true));
 
         def.enabled = true;
+    }
+
+    private void OnDisable() {
+        // Reset();
     }
 
     [ContextMenu("Reset Now")]
