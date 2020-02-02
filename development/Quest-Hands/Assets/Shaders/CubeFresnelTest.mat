@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CubeFresnelTest
+  m_Shader: {fileID: -6465566751694194690, guid: dab3faf91cd37a04a863d67e785b3791,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Floats:
+    - Vector1_B3C16B06: 2.03
+    - Vector1_D65D9333: 0.2
+    m_Colors:
+    - Color_7972F9C6: {r: 0.32075468, g: 0.15025055, b: 0.001512998, a: 0}
+    - Color_A68A307A: {r: 0.38207546, g: 1, b: 0.45530337, a: 0}
