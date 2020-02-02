@@ -9,10 +9,11 @@ public class TractorBeam : MonoBehaviour
     public float tractorBeamRadius = 0.1f;
     public float particleEmission = 20f;
     public LayerMask layerMask;
+    public float forceCenterDistance = 0.22f;
 
     public Transform visuals;
 
-    Vector3 forceCenter => info.averageRootPos + info.handDirection * 0.14f;
+    Vector3 forceCenter => info.averageRootPos + info.handDirection * forceCenterDistance;
 
     public ParticleSystem system;
     public ParticleSystem linearSystem;

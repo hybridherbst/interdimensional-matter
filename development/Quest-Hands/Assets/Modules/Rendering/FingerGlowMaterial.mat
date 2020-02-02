@@ -72,8 +72,8 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _InfluenceMetallic: 0.8
-    - _InfluenceSmoothness: 0.82
+    - _InfluenceMetallic: 0.11
+    - _InfluenceSmoothness: 0.91
     - _Metallic: 0.09
     - _OcclusionStrength: 1
     - _Power: 1.81

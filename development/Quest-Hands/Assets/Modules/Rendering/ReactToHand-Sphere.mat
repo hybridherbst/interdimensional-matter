@@ -22,7 +22,7 @@ Material:
     m_TexEnvs: []
     m_Floats:
     - _InfluenceMetallic: 0.04
-    - _InfluenceSmoothness: 0.05
+    - _InfluenceSmoothness: 0.76
     - _Metallic: 0.91
     - _Power: 0.5
     - _Smoothness: 0.76
