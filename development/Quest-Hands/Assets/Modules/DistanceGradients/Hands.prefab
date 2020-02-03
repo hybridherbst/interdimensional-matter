@@ -233,6 +233,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniformPrefix: _Hands
+  fromToDistance: {x: 1, y: 0}
+  power: 1
   pointsOfInterest:
   - {fileID: 4288334999240664720}
   - {fileID: 4288334999820356949}

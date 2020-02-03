@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4697866589576991359}
   - component: {fileID: 7862028369424059222}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: MagicSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2725,6 +2725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deformerParent: {fileID: 0}
+  deformerParentTag: Hands
 --- !u!135 &7862028369424059222
 SphereCollider:
   m_ObjectHideFlags: 0

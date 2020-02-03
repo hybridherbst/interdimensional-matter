@@ -26,6 +26,7 @@ Material:
     - _Metallic: 0.05
     - _Power: 0.5
     - _Smoothness: 0.49
+    - _distanceMultiplier: 1
     m_Colors:
     - _BaseColor: {r: 0.754717, g: 0.62341315, b: 0.31683874, a: 1}
     - _FromToDistance: {r: 0.15, g: 0, b: 0, a: 0}

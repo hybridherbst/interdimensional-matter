@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniformPrefix: _Environment
+  fromToDistance: {x: 1, y: 0}
+  power: 1
   pointsOfInterest:
   - {fileID: 2599738487752625920}
   - {fileID: 2599738487147669158}
