@@ -592,13 +592,13 @@ MonoBehaviour:
 
     w <roomid> <key> <value> - Set room data
 
-    n
-    - Request user nonce
+    n -
+    Request user nonce
 
     e - Check for entitlement
 
-    a <achievement name>
-    - get achievement definition
+    a <achievement name> -
+    get achievement definition
 
     b <achievement name> - get achievement progress
 
