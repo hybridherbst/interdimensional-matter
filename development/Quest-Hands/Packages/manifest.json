@@ -1,12 +1,14 @@
 {
   "dependencies": {
+    "com.unity.render-pipelines.core": "file:../../../../thirdparty/Unity-ScriptableRenderPipeline/com.unity.render-pipelines.core",
+    "com.unity.render-pipelines.universal":  "file:../../../../thirdparty/Unity-ScriptableRenderPipeline/com.unity.render-pipelines.universal",
+    "com.unity.shadergraph":  "file:../../../../thirdparty/Unity-ScriptableRenderPipeline/com.unity.shadergraph",
     "com.beans.deform": "https://github.com/keenanwoodall/Deform.git",
     "com.unity.collab-proxy": "1.2.16",
     "com.unity.formats.fbx": "3.0.1-preview.2",
     "com.unity.ide.rider": "1.1.4",
     "com.unity.ide.vscode": "1.1.4",
     "com.unity.mobile.android-logcat": "1.0.0",
-    "com.unity.render-pipelines.universal": "7.1.8",
     "com.unity.test-framework": "1.1.9",
     "com.unity.textmeshpro": "2.0.1",
     "com.unity.timeline": "1.2.10",
