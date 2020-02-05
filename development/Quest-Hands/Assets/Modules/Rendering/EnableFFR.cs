@@ -11,4 +11,9 @@ public class EnableFFR : MonoBehaviour
         // Unity.XR.Oculus.Utils.SetFoveationLevel(null);
         OVRPlugin.fixedFoveatedRenderingLevel = ffrLevel;
     }
+
+    [ContextMenu("Log Cam State")]
+    void LogCamState() {
+        Debug.Log(UnityEngine.XR.XRSettings.stereoRenderingMode);
+    }
 }
