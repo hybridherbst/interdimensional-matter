@@ -63,3 +63,5 @@ ignore/
 *.sln
 *.csproj
 .vscode
+development/Quest-Hands/.vs
+development/Quest-Hands/obj/Debug
