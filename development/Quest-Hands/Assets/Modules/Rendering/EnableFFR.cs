@@ -27,6 +27,6 @@ public class EnableFFR : MonoBehaviour
     [ContextMenu("Log Cam State")]
     void LogCamState() {
         // Debug.Log(UnityEngine.XR.XRSettings.stereoRenderingMode);
-        Debug.Log("can use single pass: " + UniversalRenderPipeline.CanXRSDKUseSinglePass(Camera.main));
+        // Debug.Log("can use single pass: " + UniversalRenderPipeline.CanXRSDKUseSinglePass(Camera.main));
     }
 }
