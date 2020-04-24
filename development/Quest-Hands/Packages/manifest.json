@@ -1,20 +1,30 @@
 {
+  "scopedRegistries": [
+    {
+      "name": "pfc",
+      "url": "https://packages.prefrontalcortex.de/b5ae82d7-6109-471c-a533-0497d4d714f5/",
+      "scopes": [
+        "com.pfc"
+      ]
+    }
+  ],
   "dependencies": {
     "com.beans.deform": "https://github.com/keenanwoodall/Deform.git",
+    "com.pfc.packagetools": "0.3.0-preview.5",
     "com.unity.collab-proxy": "1.2.16",
     "com.unity.formats.fbx": "3.0.1-preview.2",
     "com.unity.ide.rider": "1.1.4",
     "com.unity.ide.vscode": "1.1.4",
-    "com.unity.mobile.android-logcat": "1.0.0",
-    "com.unity.render-pipelines.core": "file:../../../../thirdparty/Unity-ScriptableRenderPipeline/com.unity.render-pipelines.core",
-    "com.unity.render-pipelines.universal": "file:../../../../thirdparty/Unity-ScriptableRenderPipeline/com.unity.render-pipelines.universal",
-    "com.unity.shadergraph": "file:../../../../thirdparty/Unity-ScriptableRenderPipeline/com.unity.shadergraph",
-    "com.unity.test-framework": "1.1.11",
+    "com.unity.mobile.android-logcat": "1.1.1",
+    "com.unity.render-pipelines.core": "7.3.1",
+    "com.unity.render-pipelines.universal": "7.3.1",
+    "com.unity.shadergraph": "7.3.1",
+    "com.unity.test-framework": "1.1.13",
     "com.unity.textmeshpro": "2.0.1",
     "com.unity.timeline": "1.2.13",
     "com.unity.ugui": "1.0.0",
     "com.unity.xr.management": "3.0.6",
-    "com.unity.xr.oculus": "1.1.5",
+    "com.unity.xr.oculus": "1.2.0",
     "com.whinarn.unitymeshsimplifier": "https://github.com/Whinarn/UnityMeshSimplifier.git",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",

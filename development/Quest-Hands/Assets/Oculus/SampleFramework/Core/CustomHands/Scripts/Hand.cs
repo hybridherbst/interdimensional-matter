@@ -14,7 +14,7 @@ using UnityEngine.SceneManagement;
 
 namespace OVRTouchSample
 {
-    // [RequireComponent(typeof(OVRGrabber))]
+    [RequireComponent(typeof(OVRGrabber))]
     public class Hand : MonoBehaviour
     {
         public const string ANIM_LAYER_NAME_POINT = "Point Layer";
@@ -41,7 +41,7 @@ namespace OVRTouchSample
 
         private Collider[] m_colliders = null;
         private bool m_collisionEnabled = true;
-        // private OVRGrabber m_grabber;
+        private OVRGrabber m_grabber;
 
         List<Renderer> m_showAfterInputFocusAcquired;
 
@@ -59,7 +59,7 @@ namespace OVRTouchSample
 
         private void Awake()
         {
-            // m_grabber = GetComponent<OVRGrabber>();
+            m_grabber = GetComponent<OVRGrabber>();
         }
 
         private void Start()
@@ -92,8 +92,8 @@ namespace OVRTouchSample
 
             float flex = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, m_controller);
 
-            // bool collisionEnabled = m_grabber.grabbedObject == null && flex >= THRESH_COLLISION_FLEX;
-            // CollisionEnable(collisionEnabled);
+            bool collisionEnabled = m_grabber.grabbedObject == null && flex >= THRESH_COLLISION_FLEX;
+            CollisionEnable(collisionEnabled);
 
             UpdateAnimStates();
         }
@@ -171,14 +171,13 @@ namespace OVRTouchSample
 
         private void UpdateAnimStates()
         {
-            // bool grabbing = m_grabber.grabbedObject != null;
-            bool grabbing = false;
+            bool grabbing = m_grabber.grabbedObject != null;
             HandPose grabPose = m_defaultGrabPose;
-            // if (grabbing)
-            // {
-            //     HandPose customPose = m_grabber.grabbedObject.GetComponent<HandPose>();
-            //     if (customPose != null) grabPose = customPose;
-            // }
+            if (grabbing)
+            {
+                HandPose customPose = m_grabber.grabbedObject.GetComponent<HandPose>();
+                if (customPose != null) grabPose = customPose;
+            }
             // Pose
             HandPoseId handPoseId = grabPose.PoseId;
             m_animator.SetInteger(m_animParamIndexPose, (int)handPoseId);
