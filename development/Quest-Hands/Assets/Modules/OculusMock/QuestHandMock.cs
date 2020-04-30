@@ -10,7 +10,7 @@ public class QuestHandMock : MonoBehaviour
     OVRSkeleton skeleton;
     public IList<OVRBone> Bones {
         get {
-#if !UNITY_EDITOR
+#if UNITY_ANDROID
             return skeleton.Bones;
 #else
             if(mockBones == null) {
@@ -41,7 +41,7 @@ public class QuestHandMock : MonoBehaviour
 
     private void Awake() {
         skeleton = GetComponent<OVRSkeleton>();
-#if !UNITY_EDITOR
+#if UNITY_ANDROID
         hand.gameObject.SetActive(false);
 #endif
     }

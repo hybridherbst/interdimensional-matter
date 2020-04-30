@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<opencv_storage>
+  <camera_id>a82180a3c50ff3167ed977cec65292cae83c0e35c67e3e74acd2be99181b5c3c</camera_id>
+  <camera_name>Logitech BRIO (046d:085e)</camera_name>
+  <image_width>1920</image_width>
+  <image_height>1080</image_height>
+  <camera_matrix type_id="opencv-matrix">
+    <rows>3</rows>
+    <cols>3</cols>
+    <dt>d</dt>
+    <data>
+      1.8823625742324252e+3 0e+0 9.6e+2 0e+0 1.8823625742324248e+3 5.4e+2 0e+0 0e+0
+      1e+0</data></camera_matrix>
+  <distortion_coefficients type_id="opencv-matrix">
+    <rows>8</rows>
+    <cols>1</cols>
+    <dt>d</dt>
+    <data>
+      0. 0. 0. 0. 0. 0. 0. 0.</data></distortion_coefficients>
+  <translation type_id="opencv-matrix">
+    <rows>3</rows>
+    <cols>1</cols>
+    <dt>d</dt>
+    <data>
+      2.0502235410871883e+0 1.4437157864592745e+0
+      -6.822814934610539e-1</data></translation>
+  <rotation type_id="opencv-matrix">
+    <rows>4</rows>
+    <cols>1</cols>
+    <dt>d</dt>
+    <data>
+      4.533595931959293e-2 -8.174178374879569e-1
+      -6.683167717530376e-2 -5.703562541736702e-1</data></rotation>
+  <attachedDevice>3</attachedDevice>
+  <camDelayMs>0</camDelayMs>
+  <chromaKeyColorRed>0</chromaKeyColorRed>
+  <chromaKeyColorGreen>255</chromaKeyColorGreen>
+  <chromaKeyColorBlue>0</chromaKeyColorBlue>
+  <chromaKeySimilarity>6.0000002384185791e-01</chromaKeySimilarity>
+  <chromaKeySmoothRange>2.9999999329447746e-02</chromaKeySmoothRange>
+  <chromaKeySpillRange>5.9999998658895493e-02</chromaKeySpillRange>
+  <raw_translation type_id="opencv-matrix">
+    <rows>3</rows>
+    <cols>1</cols>
+    <dt>d</dt>
+    <data>
+      2.889648e-1 1.587082e+0
+      3.428171e-2</data></raw_translation>
+  <raw_rotation type_id="opencv-matrix">
+    <rows>4</rows>
+    <cols>1</cols>
+    <dt>d</dt>
+    <data>
+      0e+0 -3.3252e-3 0e+0 9.999945e-1</data></raw_rotation>
+  </opencv_storage>
+  
