@@ -31,7 +31,7 @@ public class CustomMR : MonoBehaviour
 			OVRPlugin.CameraIntrinsics cameraIntrinsics;
 			OVRPlugin.CameraExtrinsics cameraExtrinsics;
 			OVRPlugin.Posef calibrationRawPose;
-			OVRPlugin.GetMixedRealityCameraInfo(0, out cameraExtrinsics, out cameraIntrinsics, out calibrationRawPose);
+			OVRPlugin.GetMixedRealityCameraInfo(0, out cameraExtrinsics, out cameraIntrinsics);//, out calibrationRawPose);
 		}
 
 		inited = true;
