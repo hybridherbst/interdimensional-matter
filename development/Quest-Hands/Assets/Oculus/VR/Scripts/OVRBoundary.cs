@@ -18,13 +18,8 @@ permissions and limitations under the License.
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using VR = UnityEngine.VR;
+using VR = UnityEngine.XR;
 using System.Runtime.InteropServices;
-#if UNITY_2017_2_OR_NEWER
-using Boundary = UnityEngine.Experimental.XR.Boundary;
-#elif UNITY_2017_1_OR_NEWER
-using Boundary = UnityEngine.Experimental.VR.Boundary;
-#endif
 
 /// <summary>
 /// Provides access to the Oculus boundary system.
@@ -71,7 +66,7 @@ public class OVRBoundary
 		else
 		{
 #if UNITY_2017_1_OR_NEWER
-			return Boundary.configured;
+			return false;
 #else
 			return false;
 #endif
@@ -129,13 +124,13 @@ public class OVRBoundary
 	{
 		if (OVRManager.loadedXRDevice != OVRManager.XRDevice.Oculus)
 		{
-#if UNITY_2017_1_OR_NEWER
-			if (Boundary.TryGetGeometry(cachedGeometryList, (boundaryType == BoundaryType.PlayArea) ? Boundary.Type.PlayArea : Boundary.Type.TrackedArea))
-			{
-				Vector3[] arr = cachedGeometryList.ToArray();
-				return arr;
-			}
-#endif
+// #if UNITY_2017_1_OR_NEWER
+// 			if (Boundary.TryGetGeometry(cachedGeometryList, (boundaryType == BoundaryType.PlayArea) ? Boundary.Type.PlayArea : Boundary.Type.TrackedArea))
+// 			{
+// 				Vector3[] arr = cachedGeometryList.ToArray();
+// 				return arr;
+// 			}
+// #endif
 			Debug.LogError("This functionality is not supported in your current version of Unity.");
 			return null;
 		}
@@ -187,11 +182,11 @@ public class OVRBoundary
 
 		else
 		{
-#if UNITY_2017_1_OR_NEWER
-			Vector3 dimensions;
-			if (Boundary.TryGetDimensions(out dimensions, (boundaryType == BoundaryType.PlayArea) ? Boundary.Type.PlayArea : Boundary.Type.TrackedArea))
-				return dimensions;
-#endif
+// #if UNITY_2017_1_OR_NEWER
+// 			Vector3 dimensions;
+// 			if (Boundary.TryGetDimensions(out dimensions, (boundaryType == BoundaryType.PlayArea) ? Boundary.Type.PlayArea : Boundary.Type.TrackedArea))
+// 				return dimensions;
+// #endif
 			return Vector3.zero;
 		}
 	}
@@ -206,7 +201,7 @@ public class OVRBoundary
 		else
 		{
 #if UNITY_2017_1_OR_NEWER
-			return Boundary.visible;
+			return false;
 #else
 			return false;
 #endif
@@ -224,7 +219,7 @@ public class OVRBoundary
 		else
 		{
 #if UNITY_2017_1_OR_NEWER
-			Boundary.visible = value;
+			return;
 #endif
 		}
 	}
