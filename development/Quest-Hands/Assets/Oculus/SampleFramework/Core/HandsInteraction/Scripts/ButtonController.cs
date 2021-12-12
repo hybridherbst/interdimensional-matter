@@ -40,6 +40,9 @@ namespace OculusSampleFramework
 		  new InteractableToolTags[] { InteractableToolTags.All };
 		private int _toolTagsMask;
 
+		[SerializeField]
+		private bool _allowMultipleNearFieldInteraction = false;
+
 		public override int ValidToolTagsMask
 		{
 			get
@@ -59,7 +62,7 @@ namespace OculusSampleFramework
 			get { return _localButtonDirection; }
 		}
 
-		private InteractableState _currentButtonState = InteractableState.Default;
+		public InteractableState CurrentButtonState { get; private set; } = InteractableState.Default;
 
 		private Dictionary<InteractableTool, InteractableState> _toolToState =
 		  new Dictionary<InteractableTool, InteractableState>();
@@ -82,183 +85,88 @@ namespace OculusSampleFramework
 			_actionZoneCollider = _actionZone.GetComponent<ColliderZone>();
 		}
 
-		private void CallEventsOnOldDepth(InteractableCollisionDepth oldDepth, InteractableTool collidingTool)
+		private void FireInteractionEventsOnDepth(InteractableCollisionDepth oldDepth,
+			InteractableTool collidingTool, InteractionType interactionType)
 		{
 			switch (oldDepth)
 			{
 				case InteractableCollisionDepth.Action:
 					OnActionZoneEvent(new ColliderZoneArgs(ActionCollider, Time.frameCount,
-					  collidingTool, InteractionType.Exit));
+					  collidingTool, interactionType));
 					break;
 				case InteractableCollisionDepth.Contact:
 					OnContactZoneEvent(new ColliderZoneArgs(ContactCollider, Time.frameCount,
-					  collidingTool, InteractionType.Exit));
+					  collidingTool, interactionType));
 					break;
 				case InteractableCollisionDepth.Proximity:
 					OnProximityZoneEvent(new ColliderZoneArgs(ProximityCollider, Time.frameCount,
-					  collidingTool, InteractionType.Exit));
-					break;
-			}
-		}
-
-		private void CallEventsOnNewDepth(InteractableCollisionDepth newDepth, InteractableTool collidingTool)
-		{
-			switch (newDepth)
-			{
-				case InteractableCollisionDepth.Action:
-					OnActionZoneEvent(new ColliderZoneArgs(ActionCollider, Time.frameCount,
-					  collidingTool, InteractionType.Enter));
-					break;
-				case InteractableCollisionDepth.Contact:
-					OnContactZoneEvent(new ColliderZoneArgs(ContactCollider, Time.frameCount,
-					  collidingTool, InteractionType.Enter));
-					break;
-				case InteractableCollisionDepth.Proximity:
-					OnProximityZoneEvent(new ColliderZoneArgs(ProximityCollider, Time.frameCount,
-					  collidingTool, InteractionType.Enter));
-					break;
-			}
-		}
-
-		private void SustainEventsOnDepth(InteractableCollisionDepth depth, InteractableTool collidingTool)
-		{
-			switch (depth)
-			{
-				case InteractableCollisionDepth.Action:
-					OnActionZoneEvent(new ColliderZoneArgs(ActionCollider, Time.frameCount,
-					  collidingTool, InteractionType.Stay));
-					break;
-				case InteractableCollisionDepth.Contact:
-					OnContactZoneEvent(new ColliderZoneArgs(ContactCollider, Time.frameCount,
-					  collidingTool, InteractionType.Stay));
-					break;
-				case InteractableCollisionDepth.Proximity:
-					OnProximityZoneEvent(new ColliderZoneArgs(ProximityCollider, Time.frameCount,
-					  collidingTool, InteractionType.Stay));
+					  collidingTool, interactionType));
 					break;
 			}
 		}
 
 		public override void UpdateCollisionDepth(InteractableTool interactableTool,
 		  InteractableCollisionDepth oldCollisionDepth,
-		  InteractableCollisionDepth collisionDepth, InteractableTool collidingTool)
+		  InteractableCollisionDepth newCollisionDepth)
 		{
 			bool isFarFieldTool = interactableTool.IsFarFieldTool;
 
 			// if this is a near field tool and another tool already controls it, bail.
-			if (!isFarFieldTool && _toolToState.Keys.Count > 0 && !_toolToState.ContainsKey(interactableTool))
+			// (assuming we are not allowing multiple near field tools)
+			bool testForSingleToolInteraction = !isFarFieldTool &&
+			  !_allowMultipleNearFieldInteraction;
+			if (testForSingleToolInteraction && _toolToState.Keys.Count > 0 &&
+				!_toolToState.ContainsKey(interactableTool))
 			{
 				return;
 			}
 
-			var oldState = _currentButtonState;
+			var oldState = CurrentButtonState;
 
 			// ignore contact test if you are using the far field tool
 			var currButtonDirection = transform.TransformDirection(_localButtonDirection);
-			bool validContact = IsValidContact(collidingTool, currButtonDirection) || collidingTool.IsFarFieldTool;
-			// in case finger enters contact zone first, we are in proximity as well
-			bool toolIsInProximity = collisionDepth >= InteractableCollisionDepth.Proximity;
-			bool toolInContactZone = collisionDepth == InteractableCollisionDepth.Contact;
-			bool toolInActionZone = collisionDepth == InteractableCollisionDepth.Action;
+			bool validContact = IsValidContact(interactableTool, currButtonDirection)
+				|| interactableTool.IsFarFieldTool;
+			// in case tool enters contact zone first, we are in proximity as well
+			bool toolIsInProximity = newCollisionDepth >= InteractableCollisionDepth.Proximity;
+			bool toolInContactZone = newCollisionDepth == InteractableCollisionDepth.Contact;
+			bool toolInActionZone = newCollisionDepth == InteractableCollisionDepth.Action;
 
-			// plane describing positive side of button
-			var buttonZonePlane = new Plane(-currButtonDirection, _buttonPlaneCenter.position);
-			// skip plane test if the boolean flag tells us not to test it
-			bool onPositiveSideOfButton = !_makeSureToolIsOnPositiveSide ||
-			  buttonZonePlane.GetSide(collidingTool.InteractionPosition);
-
-			bool switchingStates = oldCollisionDepth != collisionDepth;
+			bool switchingStates = oldCollisionDepth != newCollisionDepth;
 			if (switchingStates)
 			{
-				CallEventsOnOldDepth(oldCollisionDepth, collidingTool);
-				CallEventsOnNewDepth(collisionDepth, collidingTool);
+				FireInteractionEventsOnDepth(oldCollisionDepth, interactableTool,
+					InteractionType.Exit);
+				FireInteractionEventsOnDepth(newCollisionDepth, interactableTool,
+					InteractionType.Enter);
 			}
 			else
 			{
-				SustainEventsOnDepth(collisionDepth, collidingTool);
+				FireInteractionEventsOnDepth(newCollisionDepth, interactableTool,
+					InteractionType.Stay);
 			}
 
-			var newState = oldState;
-			if (collidingTool.IsFarFieldTool)
+			var upcomingState = oldState;
+			if (interactableTool.IsFarFieldTool)
 			{
-				newState = toolInContactZone ? InteractableState.ContactState :
+				upcomingState = toolInContactZone ? InteractableState.ContactState :
 				  toolInActionZone ? InteractableState.ActionState : InteractableState.Default;
 			}
 			else
 			{
-				switch (oldState)
-				{
-					case InteractableState.ActionState:
-						if (!toolInActionZone)
-						{
-							// if retreating from action, can go back into action state even if contact
-							// is not legal (i.e. tool/finger retracts)
-							if (toolInContactZone)
-							{
-								newState = InteractableState.ContactState;
-							}
-							else if (toolIsInProximity)
-							{
-								newState = InteractableState.ProximityState;
-							}
-							else
-							{
-								newState = InteractableState.Default;
-							}
-						}
-
-						break;
-					case InteractableState.ContactState:
-						if (collisionDepth < InteractableCollisionDepth.Contact)
-						{
-							newState = toolIsInProximity ? InteractableState.ProximityState : InteractableState.Default;
-						}
-						// can only go to action state if contact is legal
-						// if tool goes into contact state due to proper movement, but does not maintain
-						// that movement throughout (i.e. a tool/finger presses downwards initially but
-						// moves in random directions afterwards), then don't go into action
-						else if (toolInActionZone && validContact && onPositiveSideOfButton)
-						{
-							newState = InteractableState.ActionState;
-						}
-
-						break;
-					case InteractableState.ProximityState:
-						if (collisionDepth < InteractableCollisionDepth.Proximity)
-						{
-							newState = InteractableState.Default;
-						}
-						else if (validContact && onPositiveSideOfButton &&
-								 collisionDepth > InteractableCollisionDepth.Proximity)
-						{
-							newState = collisionDepth == InteractableCollisionDepth.Action
-							  ? InteractableState.ActionState
-							  : InteractableState.ContactState;
-						}
-
-						break;
-					case InteractableState.Default:
-						// test contact, action first then proximity (more important states
-						// take precedence)
-						if (validContact && onPositiveSideOfButton &&
-							  collisionDepth > InteractableCollisionDepth.Proximity)
-						{
-							newState = collisionDepth == InteractableCollisionDepth.Action
-							  ? InteractableState.ActionState
-							  : InteractableState.ContactState;
-						}
-						else if (toolIsInProximity)
-						{
-							newState = InteractableState.ProximityState;
-						}
-
-						break;
-				}
+				// plane describing positive side of button
+				var buttonZonePlane = new Plane(-currButtonDirection, _buttonPlaneCenter.position);
+				// skip plane test if the boolean flag tells us not to test it
+				bool onPositiveSideOfButton = !_makeSureToolIsOnPositiveSide ||
+				  buttonZonePlane.GetSide(interactableTool.InteractionPosition);
+				upcomingState = GetUpcomingStateNearField(oldState, newCollisionDepth,
+					toolInActionZone, toolInContactZone, toolIsInProximity,
+					validContact, onPositiveSideOfButton);
 			}
 
-			if (newState != InteractableState.Default)
+			if (upcomingState != InteractableState.Default)
 			{
-				_toolToState[interactableTool] = newState;
+				_toolToState[interactableTool] = upcomingState;
 			}
 			else
 			{
@@ -266,31 +174,136 @@ namespace OculusSampleFramework
 			}
 
 			// far field tools depend on max state set
-			if (isFarFieldTool)
+			// (or if proper flag is set for near field tools)
+			bool setMaxStateForAllTools = isFarFieldTool ||
+			  _allowMultipleNearFieldInteraction;
+			if (setMaxStateForAllTools)
 			{
 				foreach (var toolState in _toolToState.Values)
 				{
-					if (newState < toolState)
+					if (upcomingState < toolState)
 					{
-						newState = toolState;
+						upcomingState = toolState;
 					}
 				}
 			}
 
-			if (oldState != newState)
+			if (oldState != upcomingState)
 			{
-				_currentButtonState = newState;
+				CurrentButtonState = upcomingState;
 
 				var interactionType = !switchingStates ? InteractionType.Stay :
-				  collisionDepth == InteractableCollisionDepth.None ? InteractionType.Exit :
+				  newCollisionDepth == InteractableCollisionDepth.None ? InteractionType.Exit :
 				  InteractionType.Enter;
-				if (InteractableStateChanged != null)
+				ColliderZone currentCollider = null;
+				switch (CurrentButtonState)
 				{
-					InteractableStateChanged.Invoke(new InteractableStateArgs(this, interactableTool,
-					  _currentButtonState, oldState, new ColliderZoneArgs(ContactCollider, Time.frameCount,
-					  collidingTool, interactionType)));
+					case InteractableState.ProximityState:
+						currentCollider = ProximityCollider;
+						break;
+					case InteractableState.ContactState:
+						currentCollider = ContactCollider;
+						break;
+					case InteractableState.ActionState:
+						currentCollider = ActionCollider;
+						break;
+					default:
+						currentCollider = null;
+						break;
 				}
+				InteractableStateChanged?.Invoke(new InteractableStateArgs(this, interactableTool,
+					CurrentButtonState, oldState, new ColliderZoneArgs(currentCollider, Time.frameCount,
+					interactableTool, interactionType)));
 			}
+		}
+
+		private InteractableState GetUpcomingStateNearField(InteractableState oldState,
+			InteractableCollisionDepth newCollisionDepth, bool toolIsInActionZone,
+			bool toolIsInContactZone, bool toolIsInProximity,
+			bool validContact, bool onPositiveSideOfInteractable)
+		{
+			InteractableState upcomingState = oldState;
+
+			switch (oldState)
+			{
+				case InteractableState.ActionState:
+					if (!toolIsInActionZone)
+					{
+						// if retreating from action, can go back into action state even if contact
+						// is not legal (i.e. tool/finger retracts)
+						if (toolIsInContactZone)
+						{
+							upcomingState = InteractableState.ContactState;
+						}
+						else if (toolIsInProximity)
+						{
+							upcomingState = InteractableState.ProximityState;
+						}
+						else
+						{
+							upcomingState = InteractableState.Default;
+						}
+					}
+
+					break;
+				case InteractableState.ContactState:
+					if (newCollisionDepth < InteractableCollisionDepth.Contact)
+					{
+						upcomingState = toolIsInProximity ? InteractableState.ProximityState :
+							InteractableState.Default;
+					}
+					// can only go to action state if contact is legal
+					// if tool goes into contact state due to proper movement, but does not maintain
+					// that movement throughout (i.e. a tool/finger presses downwards initially but
+					// moves in random directions afterwards), then don't go into action
+					else if (toolIsInActionZone && validContact && onPositiveSideOfInteractable)
+					{
+						upcomingState = InteractableState.ActionState;
+					}
+
+					break;
+				case InteractableState.ProximityState:
+					if (newCollisionDepth < InteractableCollisionDepth.Proximity)
+					{
+						upcomingState = InteractableState.Default;
+					}
+					else if (validContact && onPositiveSideOfInteractable &&
+							 newCollisionDepth > InteractableCollisionDepth.Proximity)
+					{
+						upcomingState = newCollisionDepth == InteractableCollisionDepth.Action
+						  ? InteractableState.ActionState
+						  : InteractableState.ContactState;
+					}
+
+					break;
+				case InteractableState.Default:
+					// test contact, action first then proximity (more important states
+					// take precedence)
+					if (validContact && onPositiveSideOfInteractable &&
+						  newCollisionDepth > InteractableCollisionDepth.Proximity)
+					{
+						upcomingState = newCollisionDepth == InteractableCollisionDepth.Action
+						  ? InteractableState.ActionState
+						  : InteractableState.ContactState;
+					}
+					else if (toolIsInProximity)
+					{
+						upcomingState = InteractableState.ProximityState;
+					}
+
+					break;
+			}
+
+			return upcomingState;
+		}
+
+		public void ForceResetButton()
+		{
+			var oldState = CurrentButtonState;
+			CurrentButtonState = InteractableState.Default;
+			InteractableStateChanged?.Invoke(new InteractableStateArgs(this, null,
+				CurrentButtonState, oldState, new ColliderZoneArgs(ContactCollider, Time.frameCount,
+				null, InteractionType.Exit)));
 		}
 
 		private bool IsValidContact(InteractableTool collidingTool, Vector3 buttonDirection)
